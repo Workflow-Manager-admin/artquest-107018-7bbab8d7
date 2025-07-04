@@ -1,104 +1,361 @@
-/* CSS Variables for Theme Management */
+/* --- ArtQuest App Modern/Playful Styles --- */
+
 :root {
-  /* Light theme colors */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
-  --text-primary: #282c34;
-  --text-secondary: #61dafb;
-  --border-color: #e9ecef;
-  --button-bg: #007bff;
-  --button-text: #ffffff;
+  --brand-pink: #fd86e3;
+  --brand-light: #fcfcfc;
+  --brand-accent: #fc0384;
+  --brand-shadow: 0 6px 32px 1px rgba(253,134,227,0.08);
+  --radius: 22px;
+  --header-height: 57px;
+  --footer-height: 45px;
+  --color-input: #fff3fa;
+  --color-secondary: #f7e0ff;
 }
 
-[data-theme="dark"] {
-  /* Dark theme colors */
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #282c34;
-  --text-primary: #ffffff;
-  --text-secondary: #61dafb;
-  --border-color: #404040;
-  --button-bg: #0056b3;
-  --button-text: #ffffff;
-}
-
-.App {
-  text-align: center;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
+body, .App, html {
+  background: var(--brand-light);
+  color: #673a6a;
+  font-family: 'Segoe UI Emoji', 'Nunito', 'Arial Rounded MT Bold', 'Verdana', 'Arial', sans-serif;
+  margin: 0; padding: 0;
   min-height: 100vh;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background 0.4s;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.app-header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--brand-light);
+  height: var(--header-height);
+  padding: 0 24px;
+  box-shadow: 0 1px 9px 1px rgba(253,134,227,0.09);
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.game-title {
+  color: var(--brand-pink);
+  font-family: inherit;
+  font-size: 1.7rem;
+  letter-spacing: 0.02em;
+  user-select: none;
+}
+.username {
+  color: #c15dd7;
+  font-size: 1.08rem;
 }
 
-.App-header {
-  background-color: var(--bg-secondary);
-  min-height: 100vh;
+.dashboard-main {
+  padding: 14px 6vw 0 6vw;
+  max-width: 1040px;
+  margin: 0 auto 0 auto;
+  min-height: calc(100vh - var(--header-height) - var(--footer-height) - 18px);
+}
+.section-title {
+  color: var(--brand-accent);
+  margin: 10px 0 16px 0;
+  font-size: 1.34rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  font-family: inherit;
+}
+.section-topdrawing { margin-bottom: 34px; }
+.section-drawings {}
+
+.top-card {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+  border-radius: var(--radius);
+  padding: 13px 32px 13px 13px;
+  background: #fff;
+  box-shadow: var(--brand-shadow);
+  min-height: 122px;
+  margin-bottom: 9px;
+  animation: popIn 0.72s;
+  max-width: 370px;
+}
+.top-card.placeholder {
+  justify-content: center;
+  font-size: 1.1em;
+  font-style: italic;
+  min-height: 110px;
+  background: var(--color-secondary);
+}
+.top-card-img {
+  width: 78px;
+  height: 78px;
+  border-radius: 17px;
+  object-fit: cover;
+  box-shadow: 0 3px 11px 1.5px rgba(253,134,227,0.09);
+  border: 2.5px solid var(--brand-pink);
+  background: #f7dbfa;
+}
+.top-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5px;
+}
+.top-card-title {
+  color: #c15dd7;
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.03em;
+}
+.top-card-artist { color: #9853a1; font-size: .94rem;}
+.top-card-likes {
+  font-size: 1.05rem;
+  color: #fd86e3;
+  margin-top: 5px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(290px,1fr));
+  gap: 22px 20px;
+  margin-bottom: 24px;
+}
+
+.drawing-card {
+  background: #fff;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 4px 24px 1.5px rgba(253,134,227,0.10);
+  padding: 15px 15px 12px 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: var(--text-primary);
-  transition: background-color 0.3s ease;
+  animation: cardEnter 1.15s cubic-bezier(.85,.02,.48,1.02) backwards;
   position: relative;
+  min-height: 244px;
+}
+.card-anim { animation: cardEnter 0.94s cubic-bezier(.8,.2,.5,1.09) backwards;}
+/* Dynamic card delays (0-650ms) */
+.card-anim-delay-0 { animation-delay: 0ms;}
+.card-anim-delay-120 { animation-delay: 120ms;}
+.card-anim-delay-240 { animation-delay: 240ms;}
+.card-anim-delay-360 { animation-delay: 360ms;}
+.card-anim-delay-480 { animation-delay: 480ms;}
+.card-anim-delay-600 { animation-delay: 600ms;}
+.card-anim-delay-650 { animation-delay: 650ms;}
+
+.drawing-image-wrap {
+  background: #fcfcfc; border-radius: 18px; box-shadow: 0 1px 10px 1.5px rgba(253,134,227,0.06);
+  width: 120px; height: 120px; display: flex; align-items: center; justify-content: center; margin-bottom: 14px;
+}
+.drawing-thumb { width: 112px; height: 112px; object-fit: cover; border-radius: 15px; border: 2px solid #fd86e3; }
+.prompt-label {
+  color: #f66dab; font-weight: 600; margin-top: 10px; font-size: 1.09em;
+  letter-spacing: .03em;
 }
 
-.App-link {
-  color: var(--text-secondary);
-  transition: color 0.3s ease;
+.guess-form { display: flex; gap: 10px; margin: 10px 0;}
+.guess-input {
+  border-radius: 9px;
+  border: 2px solid #fd86e3;
+  background: var(--color-input);
+  padding: 7px 10px;
+  font-size: 1.00em;
+  flex-basis: 120px;
+  font-family: inherit;
+  font-weight: 500;
 }
-
-.theme-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: var(--button-bg);
-  color: var(--button-text);
-  border: none;
+.guess-form .btn-mini {
+  font-size: .96em;
   border-radius: 8px;
-  padding: 10px 20px;
-  font-size: 14px;
-  font-weight: 600;
+  background: var(--color-secondary);
+  color: #8f2e79;
+  border: none;
+  font-weight: 700;
+  box-shadow: 0 1px 3px 1px rgba(253,134,227,0.09);
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.theme-toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  opacity: 0.9;
+.guess-attempted {
+  font-size: 1.12em;
+  margin: 8px 0 6px 0;
+}
+.correct-guess { color: #10bb34; font-weight: 700;}
+.incorrect-guess { color: #e14b2b; font-weight: 700;}
+
+.guess-list {
+  margin: 7px 0 0 0;
+  min-height: 21px;
+}
+.guesses-label {
+  color: #a6918a; font-size: .89em; margin-right: 2px;
+}
+.guesses { display: flex; gap: 7px; flex-wrap: wrap;}
+.guess-pill {
+  background: #fbecf9;
+  color: #863ba2;
+  border-radius: 14px;
+  padding: 2px 10px;
+  font-size: .97em;
+  margin-right: 2px;
+  user-select: none;
 }
 
-.theme-toggle:active {
-  transform: translateY(0);
+.drawing-card-author {
+  position: absolute; bottom: 10px; right: 12px;
+  font-size: .97em;
+  color: #c572bd;
+  opacity: 0.88;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* FAB */
+.fab {
+  position: fixed;
+  bottom: 35px;
+  right: 4vw;
+  background: var(--brand-pink);
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  box-shadow: 0 4px 24px 1px #fd86e320;
+  color: #fff;
+  font-size: 2.2em;
+  font-weight: 800;
+  border: none;
+  z-index: 80;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: background .17s, transform .14s;
+  outline: none;
+  border: 4px solid #fcfcfc;
+}
+.fab:hover { background: #fc0384; transform: scale(1.07);}
+.fab:active { background: #c84d9c; }
+
+/* Modals/Overlays */
+.modal-overlay {
+  position: fixed;
+  z-index: 200;
+  left: 0; top: 0; width: 100vw; height: 100vh;
+  background: rgba(241,225,238,0.78);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Responsive design for mobile */
-@media (max-width: 768px) {
-  .theme-toggle {
-    top: 10px;
-    right: 10px;
-    padding: 8px 16px;
-    font-size: 12px;
-  }
+/* Username Modal */
+.username-modal {
+  background: #fff;
+  padding: 38px 35px 25px 35px;
+  border-radius: 26px;
+  box-shadow: 0 0 44px 1.5px rgba(253,134,227,0.13);
+  display: flex; flex-direction: column; align-items: center;
+  min-width: 310px;
+}
+.username-modal h2 { font-size: 1.35em; margin-bottom: 15px;}
+.input {
+  border-radius: 9px; border: 2px solid #fd86e3;
+  background: var(--color-input);
+  padding: 8px 16px; font-size: 1.1em;
+  font-family: inherit; font-weight: 500;
+}
+.btn {
+  background: var(--brand-pink);
+  color: #fff;
+  border-radius: 11px;
+  border: 0;
+  font-family: inherit;
+  font-size: 1.04em;
+  font-weight: 700;
+  padding: 9px 23px;
+  cursor: pointer;
+  transition: background .15s, box-shadow .13s;
+  margin-top: 8px;
+  box-shadow: var(--brand-shadow);
+}
+.btn-accent { background: var(--brand-accent);}
+.btn-secondary {
+  background: #ffe9fa;
+  color: #c15dd7;
+  border: 2px solid #fd86e3;
+  margin-left: 15px;
+}
+
+.drawing-modal {
+  background: #fff;
+  padding: 25px 22px 18px 22px;
+  border-radius: 24px;
+  min-width: 320px;
+  box-shadow: 0 0 44px 6px #fd86e314;
+  display: flex; flex-direction: column; align-items: center;
+}
+.fun-title {
+  color: #fc0384; font-weight: 700; font-size: 1.26em; margin-bottom: 2px;
+}
+.canvas-container { position: relative;}
+
+.spin-modal {
+  display: flex; flex-direction: column; align-items: center;
+  background: #fff;
+  padding: 46px 45px 23px 45px;
+  border-radius: 26px;
+  min-width: 240px;
+  min-height: 170px;
+  box-shadow: 0 0 32px 2px #fd86e317;
+}
+.spin-wheel {
+  font-size: 4.2em;
+  color: #fd86e3;
+  transition: transform 1s cubic-bezier(.9,.09,.39,1.39);
+}
+.spin-wheel.spinning {
+  animation: spin 1.15s cubic-bezier(.75,-0.07,.31,1.25);
+}
+@keyframes spin {
+  0% { transform: rotate(0deg) scale(1);}
+  75% { transform: rotate(560deg) scale(1.4);}
+  100% { transform: rotate(720deg) scale(1);}
+}
+@keyframes popIn {
+  0% { transform: scale(0.7); opacity: 0;}
+  90% { transform: scale(1.08);}
+  100% {transform: scale(1); opacity: 1;}
+}
+@keyframes cardEnter {
+  0% { transform: translateY(60px) scale(.7); opacity: 0}
+  95% { transform: scale(1.04);}
+  100% {transform: translateY(0) scale(1); opacity: 1;}
+}
+
+/* Timer SVG animation next to canvas is handled inline in JS */
+
+
+/* Footer */
+.app-footer {
+  height: var(--footer-height);
+  display: flex;
+  align-items: center; justify-content: center;
+  background: #fcfcfc;
+  color: #c15dd7; font-size: 1.02rem;
+  letter-spacing: 0.06em;
+  position: relative;
+  bottom: 0; left: 0; width: 100vw; z-index: 2;
+  box-shadow: 0 -1px 9px 2px #fd86e308;
+  margin-top: 11px;
+}
+
+.loading {
+  color: #c15dd7; font-style: italic; font-size: 1.2em; text-align: center; width: 100%;
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 700px) {
+  .dashboard-main { padding: 4px 2vw;}
+  .grid { grid-template-columns: 1fr;}
+  .drawing-card { min-width: 95vw; }
+  .fab {right: 8vw; bottom: 23px; width: 51px; height: 51px; font-size: 1.7em;}
+  .top-card {max-width: 99vw; min-height: 98px;}
+  .drawing-modal { min-width: calc(93vw);}
+  .spin-modal {min-width: calc(88vw);}
+}
+
+/* Hides scroll for modals */
+body.modal-open {
+  overflow: hidden;
 }
